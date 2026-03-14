@@ -1,18 +1,16 @@
-[workspace]
+[project]
 name = "iwa-guardrail-checker"
 version = "0.1.0"
-description = "Preflight checker for survival-oriented bioinformatics datasets."
-authors = ["iwaguchi1982"]
+description = "Preflight checker for survival-oriented bioinformatics datasets"
 channels = ["conda-forge"]
 platforms = ["linux-64"]
 
-[dependencies]
-python = ">=3.10"
-streamlit = "*"
-pandas = "*"
-lifelines = "*"
-scipy = "*"
-plotly = "*"
-
 [tasks]
 app = "python -m streamlit run iwa_guardrail_checker.py"
+
+[dependencies]
+python = ">=3.10,<3.13"
+streamlit = "*"
+pandas = "*"
+numpy = "*"
+plotly = "*"

@@ -6,43 +6,25 @@ Preflight checker for survival-oriented bioinformatics datasets, with guardrails
 
 `iwa-guardrail-checker` is a lightweight source-available Streamlit app designed to assess whether a clinical dataset is suitable for downstream survival analysis.
 
-Before running Kaplan-Meier curves, Cox proportional hazards models, or related exploratory workflows, this tool helps identify common statistical risks such as:
+Before running Kaplan-Meier curves, Cox proportional hazards models, or related exploratory workflows, this tool helps identify common statistical risks and provides actionable recommendations.
 
-- too few events
-- severe missingness
-- zero-event groups
-- strong group size imbalance
-- weak Cox model readiness
+## Key Features
 
-The goal is not to replace analysis, but to prevent unsafe or misleading analysis from starting too early.
+- **🛡️ Comprehensive Guardrails**: Unified `OK / CAUTION / DANGER` status evaluation for your dataset.
+- **📁 Smart Upload**: Supports CSV/TSV/TXT files with automatic delimiter detection.
+- **🗺️ Automatic Column Mapping**: Intelligent detection of Patient ID, Time, Event, and Group columns based on common naming conventions.
+- **📊 Interactive Dashboard**:
+    - **Basic Summary**: Event rates, unique patient counts, and duplicate detection.
+    - **Group Distribution**: Visual horizontal bar charts for quick sample size assessment.
+    - **Covariate Retention**: Estimates row loss for multivariate models (complete-case analysis).
+- **💡 Actionable Recommendations**: Dynamic suggestions to remediate detected data quality issues.
 
 ## Intended Users
 
-This project is intended for:
-
-- bioinformatics engineers
-- translational researchers
-- clinical data analysts
-- users preparing datasets for survival-oriented workflows
-
-## Current Scope
-
-This repository currently focuses on:
-
-- clinical table upload
-- required column mapping
-- missingness checks
-- event sufficiency checks
-- basic Cox readiness heuristics
-- overall `OK / CAUTION / DANGER` judgement
-
-## Environment
-
-Tested environment:
-
-- OS: Ubuntu 24.04 / WSL2 Ubuntu
-- Python: 3.10+
-- Package / environment manager: Pixi
+- Bioinformatics engineers
+- Translational researchers
+- Clinical data analysts
+- Users preparing datasets for survival-oriented workflows
 
 ## Installation
 
@@ -57,45 +39,47 @@ Install Pixi if it is not already installed:
 ```bash
 curl -fsSL https://pixi.sh/install.sh | sh
 ```
+
 Install project dependencies:
 ```bash
 pixi install
 ```
 
 ## Usage
-Run the application inside the Pixi environment:
-```bash
-pixi shell
-python -m streamlit run iwa_guardrail_checker.py
-```
-Alternatively, you can launch it directly without entering the shell:
+Run the application:
+
 ```bash
 pixi run python -m streamlit run iwa_guardrail_checker.py
 ```
-## Planned Checks in v0.1
-- required column existence
-- duplicate patient IDs
-- total sample count
-- total event count
-- event count by group
-- minimum group size
-- minimum events per group
-- estimated events per parameter
-- missingness by column
-- complete-case retention estimate
 
-## Output
-The app returns:
-- overall status: OK, CAUTION, or DANGER
-- concise reasons list
-- summary tables for survival readiness
-- missingness overview
+Alternatively, manually launch it:
+```bash
+python -m streamlit run iwa_guardrail_checker.py
+```
+
+## Checked Rules (v0.1)
+
+- **DANGER**
+  - required column missing
+  - row count < 5
+  - non-positive follow-up time
+  - invalid event values (outside 0/1)
+  - all events or zero events
+  - fewer than 2 valid groups
+
+- **CAUTION**
+  - duplicate IDs
+  - small group size (< 5)
+  - large group size imbalance
+  - low total events
+  - zero events in specific groups
+  - missing covariates (retention check)
 
 ## Notes
-> 本プロジェクトは探索研究向けの開発中ソフトウェアです。
+
+> 本プロジェクトは探索研究向けの開発中ソフトウェアです。  
 > 臨床判断、規制対応用途、診断用途を意図したものではありません。
 
 ## License
-
-This project is source-available under the [MIT License](LICENSE).
+This project is distributed under the  [Iwa Collections Non-Resale License 1.0](LICENSE).
 
