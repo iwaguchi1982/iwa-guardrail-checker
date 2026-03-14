@@ -1,0 +1,23 @@
+1. validate_numeric の failure_count 変数が不要
+
+validation.py では failure_count を計算していますが、実際には actual_failures を返しているので、failure_count は消してよいです。読み手が少し迷います。
+
+2. event 判定のメッセージを少しだけ正確に
+
+guardrails.py では total_events == 0 と total_events == n_rows を「no variability」としていますが、実際には invalid 値や missing が混じるケースもあるので、文言を少し弱めると安全です。
+たとえば:
+
+"No events coded as 1 were detected."
+
+"All non-missing event values appear to be coded as 1."
+
+のようにすると、より正確です。
+
+3. group plot は group 数が多い時の高さ調整が欲しい
+
+今は height=300 固定ですが、群が多いと詰まりそうです。
+height=max(300, 40 * len(group_df)) くらいにすると扱いやすいです。
+
+4. UTF-8 以外への耐性は次に欲しい
+
+現状の UTF-8 前提は v0.1 として許容範囲ですが、実データでは utf-8-sig や cp932 が混じる可能性が高いです。

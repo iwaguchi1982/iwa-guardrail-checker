@@ -51,7 +51,7 @@ Clone this repository:
 ```bash
 git clone https://github.com/iwaguchi1982/iwa-guardrail-checker.git
 cd iwa-guardrail-checker
-``
+```
 
 Install Pixi if it is not already installed:
 ```bash
@@ -90,6 +90,10 @@ The app returns:
 - concise reasons list
 - summary tables for survival readiness
 - missingness overview
+
+## Notes
+> 本プロジェクトは探索研究向けの開発中ソフトウェアです。
+> 臨床判断、規制対応用途、診断用途を意図したものではありません。
 
 ## License
 

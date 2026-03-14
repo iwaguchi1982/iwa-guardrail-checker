@@ -1,0 +1,11 @@
+patient_id,duration,event,group,age,sex
+P001,45.2,1,Treatment A,65,M
+P002,12.1,0,Control,72,F
+P003,33.5,1,Treatment A,58,M
+P004,21.0,1,Control,61,F
+P005,55.0,0,Treatment A,44,F
+P006,10.5,1,Control,80,M
+P007,42.1,1,Treatment A,67,M
+P008,15.2,0,Control,55,F
+P009,28.8,1,Treatment A,70,M
+P010,18.4,1,Control,63,F
